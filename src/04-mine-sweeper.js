@@ -21,8 +21,29 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function getNumberofMine(matrix, row, col) {
+  let sum = 0;
+  for (let i = row - 1; i <= row + 1; i += 1) {
+    if (i >= 0 && i < matrix.length) {
+      for (let j = col - 1; j <= matrix[i].length; j += 1) {
+        if (j >= 0 && j < matrix[i].length && matrix[i][j] === true && !(i === row && j === col)) {
+          sum += 1;
+        }
+      }
+    }
+  }
+  return sum;
+}
+
+function minesweeper(matrix) {
+  const newMatrix = [];
+  for (let i = 0; i < matrix.length; i += 1) {
+    newMatrix[i] = [];
+    for (let j = 0; j < matrix[i].length; j += 1) {
+      newMatrix[i][j] = getNumberofMine(matrix, i, j);
+    }
+  }
+  return newMatrix;
 }
 
 module.exports = minesweeper;
